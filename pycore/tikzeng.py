@@ -9,6 +9,7 @@ def to_head( projectpath ):
 \subimport{"""+ pathlayers + r"""}{init}
 \usetikzlibrary{positioning}
 \usetikzlibrary{3d} %for including external image 
+\usetikzlibrary{calc}
 """
 
 def to_cor():
@@ -207,5 +208,4 @@ def to_generate( arch, pathname="file.tex" ):
             print(c)
             f.write( c )
      
-
 
