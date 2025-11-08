@@ -41,6 +41,78 @@ def to_input( pathfile, to='(-3,0,0)', width=8, height=8, name="temp" ):
 \node[canvas is zy plane at x=0] (""" + name + """) at """+ to +""" {\includegraphics[width="""+ str(width)+"cm"+""",height="""+ str(height)+"cm"+"""]{"""+ pathfile +"""}};
 """
 
+
+def to_layer_box(
+    name,
+    caption,
+    xlabel,
+    zlabel,
+    ylabel="",
+    color="\\ConvColor",
+    offset="(0,0,0)",
+    to="(0,0,0)",
+    width=2,
+    height=10,
+    depth=10,
+):
+    return (
+        r"""
+\pic[shift={"""
+        + offset
+        + r"""}] at """
+        + to
+        + r"""
+    {Box={
+        name="""
+        + name
+        + r""",
+        caption="""
+        + caption
+        + r""",
+        xlabel={{"""
+        + str(xlabel)
+        + r""", }},
+        zlabel="""
+        + str(zlabel)
+        + r""",
+        ylabel="""
+        + str(ylabel)
+        + r""",
+        fill="""
+        + color
+        + r""",
+        height="""
+        + str(height)
+        + r""",
+        width="""
+        + str(width)
+        + r""",
+        depth="""
+        + str(depth)
+        + r"""
+        }
+    };
+"""
+    )
+
+
+def to_label(name, text, offset="(0,0,0)", to="(0,0,0)", anchor="west"):
+    return (
+        r"""
+\node[anchor="""
+        + anchor
+        + r"""] ("""
+        + name
+        + r""") at ($ """
+        + to
+        + r""" + """
+        + offset
+        + r""" $) {"""
+        + text
+        + r"""};
+"""
+    )
+
 # Conv
 def to_Conv( name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=40, caption=" " ):
     return r"""
@@ -208,4 +280,3 @@ def to_generate( arch, pathname="file.tex" ):
             print(c)
             f.write( c )
      
-
